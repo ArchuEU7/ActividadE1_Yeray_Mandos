@@ -9,9 +9,11 @@ public class Move : MonoBehaviour
 {
     public GameObject MuerteP;
     public TextMeshProUGUI textoMP;
+    [SerializeField] GameObject PauseButton;
 
     [SerializeField] float speed = 5f;
     [SerializeField] float tiempoReinicio = 3f;
+    public TextMeshProUGUI scoreTexto;
 
     private Vector2 movement;
     private Rigidbody2D rb;
@@ -48,6 +50,8 @@ public class Move : MonoBehaviour
             textoMP.gameObject.SetActive(true);
 
             Invoke(nameof(muerteups), tiempoReinicio);
+            PauseButton.SetActive(false);
+            scoreTexto.gameObject.SetActive(false);
         }
     }
 

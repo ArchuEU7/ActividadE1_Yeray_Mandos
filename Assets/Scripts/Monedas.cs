@@ -1,11 +1,15 @@
 
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Monedas : MonoBehaviour
 {
     public GameObject MuerteP;
     public TextMeshProUGUI scoreTexto;
+    public TextMeshProUGUI victoriaT;
+    [SerializeField] float tiempoReinicio = 3f;
+    [SerializeField] GameObject PauseButton;
 
     private int score = 0;
     private bool objetivoCompletado = false;
@@ -30,12 +34,23 @@ public class Monedas : MonoBehaviour
                 objetivoCompletado = true;
                 MuerteP.SetActive(true);
                 scoreTexto.gameObject.SetActive(false);
+                victoriaT.gameObject.SetActive(true);
+                Invoke(nameof(ganastelol), tiempoReinicio);
+                PauseButton.SetActive(false);
             }
         }
     }
 
     private void ActualizarScore()
     {
-        scoreTexto.text = "Score: " + score;
+        scoreTexto.text = " " + score;
+    }
+
+    public void ganastelol()
+    {
+        SceneManager.LoadScene(
+            SceneManager.GetActiveScene().buildIndex
+
+        );
     }
 }
